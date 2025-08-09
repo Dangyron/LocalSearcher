@@ -1,0 +1,36 @@
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: /backend/LocalSearcher.Api/Dockerfile
+    env_file: .env
+    environment:
+      - SearchConfig__Directory=/mnt/data
+      - LogsFolder=/logs
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${DATA_FOLDER}:/mnt/data
+      - ${LOGS_FOLDER}:/logs
+    depends_on:
+      - redis
+      - seq
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  seq:
+    image: datalust/seq:latest
+    env_file:
+      - .env
+    ports:
+      - "5341:5341"
+    volumes:
+      - seq-data:/data
+
+volumes:
+  data:
+  logs:
+  seq-data:
