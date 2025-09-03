@@ -1,6 +1,9 @@
-﻿namespace LocalSearcher.Api.Common.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LocalSearcher.Api.Common.Interfaces;
 
 public interface ITokenizerFactory
 {
-    bool TryGetTokenizer(string extension, out ITokenizer? tokenizer);
+    string[] SupportedFileExtensions { get; }
+    bool TryGetTokenizer(string extension, [MaybeNullWhen(false)] out ITokenizer tokenizer);
 }

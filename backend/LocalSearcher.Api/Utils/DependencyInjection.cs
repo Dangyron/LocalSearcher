@@ -49,10 +49,9 @@ public static class DependencyInjection
     private static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         return services
-            .AddHostedService<IndexBackgroundService>()
+            .AddHostedService<TfIdfIndexService>()
             .AddSingleton<ITfIdfIndexStorageService, TfIdfRedisCacheService>()
             .AddSingleton<ITokenizerFactory, TokenizersFactory>()
-            .AddScoped<IIndexService, TfIdfIndexService>()
             .AddScoped<ISearchService, TfIdfSearchService>();
     }
 
@@ -62,8 +61,9 @@ public static class DependencyInjection
         {
             RedisConnectionString = configuration["ConnectionStrings:Redis"]!,
             SeqConnectionUrl = configuration["ConnectionStrings:SeqUrl"]!,
-            LogsDirectoryPath = configuration["LogsFolder"]!,
-            SearchBaseDirectoryPath = configuration["SearchConfig:Directory"]!
+            LogsDirectoryPath = configuration["Config:LogsFolder"]!,
+            SearchBaseDirectoryPath = configuration["Config:SearchDirectory"]!,
+            FileWatcherEnabled = bool.TryParse(configuration["Config:FileWatchingEnabled"], out var en) && en,
         };
         
         var env = services.BuildServiceProvider().GetRequiredService<IHostEnvironment>();

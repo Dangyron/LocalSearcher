@@ -2,8 +2,9 @@
 
 public class ApplicationGLobalConfig
 {
-    public string RedisConnectionString { get; set; } = null!;
-    public string SeqConnectionUrl { get; set; } = null!;
-    public string LogsDirectoryPath { get; set; } = null!;
-    public string SearchBaseDirectoryPath { get; set; } = null!;
+    public required string RedisConnectionString { get; init; }
+    public string? SeqConnectionUrl { get; init; }
+    public required string LogsDirectoryPath { get; init; }
+    public required string SearchBaseDirectoryPath { get; init; }
+    public required bool FileWatcherEnabled { get; init; }
 }

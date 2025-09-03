@@ -1,19 +1,28 @@
-﻿using LocalSearcher.Api.Common.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
+using LocalSearcher.Api.Common.Interfaces;
 using LocalSearcher.Api.Common.Tokenizers;
 
 namespace LocalSearcher.Api.Common.Factories;
 
-public class TokenizersFactory :  ITokenizerFactory
+public class TokenizersFactory : ITokenizerFactory
 {
-    private readonly Dictionary<string, ITokenizer> _tokenizers = 
-        new (StringComparer.OrdinalIgnoreCase)
+    private readonly ITokenizer[] _tokenizers =
+    [
+        new BareTextTokenizer(),
+        new MarkdownTokenizer()
+    ];
+
+    public string[] SupportedFileExtensions { get; } = [".md", ".txt"];
+
+    public bool TryGetTokenizer(string? extension, [MaybeNullWhen(false)] out ITokenizer tokenizer)
+    {
+        tokenizer = extension switch
         {
-            [".md"] = new MarkdownTokenizer(),
-            [".txt"] = new BareTextTokenizer(),
+            ".txt" => _tokenizers[0],
+            ".md" => _tokenizers[1],
+            _ => null,
         };
 
-    public bool TryGetTokenizer(string? extension, out ITokenizer? tokenizer)
-    {
-        return _tokenizers.TryGetValue(extension ?? string.Empty, out tokenizer);
+        return tokenizer != null;
     }
 }

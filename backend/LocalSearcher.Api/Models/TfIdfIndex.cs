@@ -7,4 +7,5 @@ public record TfIdfIndex(
     
 public record Document(
     Dictionary<string, int> TermFrequency,
-    int TermsCountWithinDocument);
+    int TermsCountWithinDocument,
+    DateTime LastModified);

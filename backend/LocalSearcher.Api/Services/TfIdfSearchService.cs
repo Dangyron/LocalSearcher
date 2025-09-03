@@ -6,15 +6,11 @@ using static LocalSearcher.Api.Utils.TfIdfIndexCacheKeys;
 
 namespace LocalSearcher.Api.Services;
 
-public class TfIdfSearchService(IIndexService indexService, ITfIdfIndexStorageService indexStorage) : ISearchService
+public class TfIdfSearchService(ITfIdfIndexStorageService indexStorage) : ISearchService
 {
     public async Task<List<SearchResult>> SearchAsync(SearchOptions searchOptions, CancellationToken cancellationToken = default)
     {
-        var index = await indexStorage.LoadAsync(SearchIndex, cancellationToken);
-        if (index == null)
-            await indexService.BuildIndexAsync(cancellationToken);
-        
-        index = (await indexStorage.LoadAsync(SearchIndex, cancellationToken))!;
+        var index = (await indexStorage.LoadAsync(SearchIndex, cancellationToken))!;
         
         var queryTerms = new BareTextTokenizer().Tokenize(searchOptions.Query).ToList();
         
