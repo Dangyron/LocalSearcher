@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -25,6 +26,9 @@ export default function Layout({ children }: LayoutProps) {
                                     Search
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <ThemeToggle />
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -43,4 +47,4 @@ export default function Layout({ children }: LayoutProps) {
             </footer>
         </div>
     );
-};
+}
