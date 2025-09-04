@@ -1,0 +1,66 @@
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+}
+
+@mixin card {
+    background-color: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: var(--shadow);
+    transition: $transition;
+}
+
+@mixin hover-effect {
+    &:hover {
+        border-color: var(--primary-light);
+        box-shadow: var(--shadow);
+    }
+}
+
+@mixin focus-effect {
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        outline: none;
+    }
+}
+
+@mixin responsive($breakpoint) {
+    @if $breakpoint ==sm {
+        @media (max-width: #{$breakpoint-sm}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==md {
+        @media (max-width: #{$breakpoint-md}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==lg {
+        @media (max-width: #{$breakpoint-lg}) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==xl {
+        @media (max-width: #{$breakpoint-xl}) {
+            @content;
+        }
+    }
+}

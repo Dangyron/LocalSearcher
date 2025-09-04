@@ -1,0 +1,120 @@
+.app-container {
+    @include flex-column;
+    min-height: 100vh;
+}
+
+.app-header {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+    padding: $spacing-md 0;
+}
+
+.header-content {
+    @include container;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include responsive(md) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 4px;
+    @include flex-center;
+    font-weight: bold;
+    margin-right: $spacing-sm;
+}
+
+.app-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.app-nav {
+    @include responsive(md) {
+        margin-top: $spacing-md;
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+        align-items: center;
+
+        @include responsive(md) {
+            flex-direction: column;
+        }
+    }
+}
+
+.nav-item {
+    margin-left: $spacing-lg;
+
+    @include responsive(md) {
+        margin-left: 0;
+        margin-top: $spacing-sm;
+    }
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: $transition;
+
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: $spacing-xs;
+    border-radius: $border-radius;
+    transition: $transition;
+
+    &:hover {
+        background-color: var(--bg-light);
+    }
+}
+
+.app-main {
+    flex: 1;
+    @include container;
+    margin: $spacing-xl auto;
+}
+
+.app-footer {
+    background-color: var(--bg-white);
+    border-top: 1px solid var(--border-color);
+    padding: $spacing-lg 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    @include container;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.875rem;
+}

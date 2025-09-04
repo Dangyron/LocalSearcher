@@ -1,0 +1,134 @@
+.search-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.search-input-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto $spacing-xl;
+}
+
+.search-input {
+    width: 100%;
+    padding: $spacing-md;
+    font-size: 1rem;
+    background-color: var(--bg-white);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: $border-radius;
+    box-shadow: var(--shadow);
+    transition: $transition;
+
+    @include focus-effect;
+
+    @include responsive(sm) {
+        padding: $spacing-sm;
+    }
+}
+
+.search-results {
+    display: grid;
+    gap: $spacing-md;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.result-item {
+    @include card;
+    display: block;
+    padding: $spacing-md;
+    text-decoration: none;
+    color: inherit;
+
+    @include hover-effect;
+
+    @include responsive(sm) {
+        padding: $spacing-sm;
+    }
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-sm;
+
+    @include responsive(md) {
+        flex-direction: column;
+    }
+}
+
+.file-name {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-right: $spacing-md;
+}
+
+.file-path {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.score-badge {
+    background-color: var(--primary-light);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 4px;
+    flex-shrink: 0;
+
+    @include responsive(md) {
+        align-self: flex-start;
+        margin-top: $spacing-sm;
+    }
+}
+
+.spinner-container {
+    @include flex-center;
+    padding: $spacing-xl 0;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(59, 130, 246, 0.1);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    margin: $spacing-lg 0;
+    text-align: center;
+    max-width: 800px;
+    margin: $spacing-lg auto;
+}
+
+.no-results {
+    text-align: center;
+    padding: $spacing-xl $spacing-lg;
+    color: var(--text-light);
+    font-size: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
